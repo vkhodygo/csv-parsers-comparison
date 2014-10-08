@@ -15,42 +15,32 @@
  ******************************************************************************/
 package com.univocity.articles.jmh;
 
-import java.io.Reader;
+import java.util.List;
 
 import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.infra.Blackhole;
+import org.supercsv.io.CsvListReader;
+import org.supercsv.io.ICsvListReader;
+import org.supercsv.prefs.CsvPreference;
 
 import com.univocity.articles.jmh.params.FileToProcess;
-import com.univocity.parsers.csv.CsvParser;
-import com.univocity.parsers.csv.CsvParserSettings;
 
-@State(Scope.Benchmark)
-public class UnivocityParser {
-
-	CsvParser parser;
-
-	@Setup
-	public void init() {
-		CsvParserSettings settings = new CsvParserSettings();
-		parser = new CsvParser(settings);
-	}
+public class SuperCsvParser {
 
 	@Benchmark
-	public void parseFile(final FileToProcess fileToProcess,
-			final Blackhole blackhole) throws Exception {
-		Reader reader = fileToProcess.getReader();
+	public void parseFile(final FileToProcess fileToProcess, final Blackhole blackhole) throws Exception {
+		ICsvListReader listReader = new CsvListReader(fileToProcess.getReader(), CsvPreference.STANDARD_PREFERENCE);
 		try {
-			parser.beginParsing(reader);
-
-			String[] data;
-			while ((data = parser.parseNext()) != null) {
+			listReader.getHeader(true);
+			List<String> data;
+			while ((data = listReader.read()) != null) {
 				blackhole.consume(data);
 			}
+
 		} finally {
-			reader.close();
+				listReader.close();
 		}
+
 	}
+
 }
