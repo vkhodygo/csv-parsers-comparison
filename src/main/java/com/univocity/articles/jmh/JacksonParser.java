@@ -25,14 +25,8 @@ public class JacksonParser  {
 
 		MappingIterator<String[]> iterator = csvMapper.reader(String[].class).readValues(fileToProcess.getReader());
 
-		int i = 0;
 		while (iterator.hasNext()) {
 			blackhole.consume(iterator.next());
-			i++;
 		}
-		if (i != fileToProcess.nbRows) {
-			throw new Error("nb rows does no match");
-		}
-
 	}
 }

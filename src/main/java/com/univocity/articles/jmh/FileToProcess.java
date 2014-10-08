@@ -31,33 +31,38 @@ public class FileToProcess {
 	
 	@TearDown
 	public void destroy() throws IOException {
-		file.delete();
+		if (nbRows != -1) {
+			file.delete();
+		}	
 	}
 	
 	@Setup
 	public void init() throws IOException {
-		
-		file = File.createTempFile("bench" + nbRows, ".txt");
-		System.out.println("Write file " + file);
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
-		try {
-			BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+		if (nbRows == -1) {
+			file = new File(inputFile);
+		} else {
+			file = File.createTempFile("bench" + nbRows, ".txt");
+			System.out.println("Write file " + file);
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));
 			try {
-				String line;
-				int i = 0;
-				while((nbRows < 0 || i < nbRows) && (line = reader.readLine()) != null) {
-					bw.write(line);
-					bw.write("\n");
-					i++;
-				};
+				BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), "UTF-8"));
+				try {
+					String line;
+					int i = 0;
+					while((nbRows < 0 || i < nbRows) && (line = reader.readLine()) != null) {
+						bw.write(line);
+						bw.write("\n");
+						i++;
+					};
+					
+				} finally {
+					reader.close();
+				}
 				
 			} finally {
-				reader.close();
+				bw.flush();
+				bw.close();
 			}
-			
-		} finally {
-			bw.flush();
-			bw.close();
 		}
 	}
 

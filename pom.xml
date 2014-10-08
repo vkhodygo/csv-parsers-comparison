@@ -100,6 +100,7 @@
                                         <exclude>META-INF/*.SF</exclude>
                                         <exclude>META-INF/*.DSA</exclude>
                                         <exclude>META-INF/*.RSA</exclude>
+                                        <exclude>worldcitiespop*.txt</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
@@ -285,7 +286,7 @@
 		<dependency>
 			<groupId>com.github.arnaudroger</groupId>
 			<artifactId>simpleFlatMapper</artifactId>
-			<version>0.9.8</version>
+			<version>0.9.8-SNAPSHOT</version>
 		</dependency>
 	    <dependency>
 	<groupId>commons-io</groupId>
