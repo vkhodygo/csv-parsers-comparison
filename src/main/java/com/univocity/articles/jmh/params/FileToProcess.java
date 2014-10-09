@@ -19,6 +19,9 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.TearDown;
 
+import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
+
 @State(Scope.Benchmark)
 public class FileToProcess {
 
@@ -28,45 +31,56 @@ public class FileToProcess {
 	@Param("src/main/resources/worldcitiespop.txt")
 	public String inputFile;
 	
-	@Param(value= { "1", "1000", "1000000", "-1"})
+	@Param(value= { "-1"})
 	public int nbRows;
+	
+	@Param(value= { "true", "false"})
+	public boolean quoted;
 	
 	public File file;
 	
 	@TearDown
 	public void destroy() throws IOException {
-		if (nbRows != -1) {
+		if (nbRows != -1 || quoted) {
 			file.delete();
 		}	
 	}
 	
 	@Setup
 	public void init() throws IOException {
-		if (nbRows == -1) {
+		if (nbRows == -1 && ! quoted) {
 			file = new File(inputFile);
 		} else {
 			file = File.createTempFile("bench" + nbRows, ".txt");
-			System.out.println("Write file " + file);
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
+			System.out.println("create file "+ file + " with " + nbRows);
+			char quoteSeparator = '"';
+			if (!quoted) {
+				quoteSeparator = CSVWriter.NO_QUOTE_CHARACTER;
+			}
+			CSVWriter csvWriter = new CSVWriter(new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset)), ',', quoteSeparator);
 			try {
-				BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), charset));
-				try {
-					String line;
-					int i = 0;
-					while((nbRows < 0 || i < nbRows) && (line = reader.readLine()) != null) {
-						bw.write(line);
-						bw.write("\n");
-						i++;
-					};
-					
-				} finally {
-					reader.close();
-				}
+				
+				int i = 0;
+				do {
+					CSVReader reader = new CSVReader(new BufferedReader(new InputStreamReader(new FileInputStream(inputFile), charset)));
+					try {
+						
+						String[] line;
+						while((nbRows < 0 || i < nbRows) && (line = reader.readNext()) != null) {
+							csvWriter.writeNext(line);
+							i++;
+						};
+						
+					} finally {
+						reader.close();
+					}
+				} while(i < nbRows);
 				
 			} finally {
-				bw.flush();
-				bw.close();
+				csvWriter.flush();
+				csvWriter.close();
 			}
+			System.out.println("file created");
 		}
 	}
 
