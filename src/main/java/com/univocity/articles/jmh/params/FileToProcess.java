@@ -39,6 +39,10 @@ public class FileToProcess {
 	
 	public File file;
 	
+	
+	@Param(value= { "false"})
+	public boolean wrapWithBufferedReader;
+	
 	@TearDown
 	public void destroy() throws IOException {
 		if (nbRows != -1 || quoted) {
@@ -85,7 +89,12 @@ public class FileToProcess {
 	}
 
 	public Reader getReader() throws FileNotFoundException, UnsupportedEncodingException {
-		return new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
+		InputStreamReader in = new InputStreamReader(new FileInputStream(file), charset);
+		if (wrapWithBufferedReader) {
+			return new BufferedReader(in);
+		} else {
+			return in;
+		}
 	}
 	
 }
