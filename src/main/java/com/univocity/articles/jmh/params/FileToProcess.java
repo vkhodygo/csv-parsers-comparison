@@ -37,6 +37,7 @@ public class FileToProcess {
 	@Param(value= { "true", "false"})
 	public boolean quoted;
 	
+	
 	public File file;
 	
 	
