@@ -31,6 +31,8 @@ import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
 
 import com.univocity.articles.jmh.params.FileToProcess;
+import com.univocity.parsers.common.ParsingContext;
+import com.univocity.parsers.common.processor.RowProcessor;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
 
@@ -42,25 +44,45 @@ import com.univocity.parsers.csv.CsvParserSettings;
 @Measurement(iterations=5,batchSize=1)
 public class UnivocityParser {
 
-	CsvParser parser;
-
+	
 	@Setup
 	public void init() {
-		CsvParserSettings settings = new CsvParserSettings();
-		parser = new CsvParser(settings);
+
 	}
 
 	@Benchmark
 	public void parseFile(final FileToProcess fileToProcess,
 			final Blackhole blackhole) throws Exception {
+		
+		CsvParserSettings settings = new CsvParserSettings();
+		//turning off features enabled by default
+		settings.setIgnoreLeadingWhitespaces(false);
+		settings.setIgnoreTrailingWhitespaces(false);
+		settings.setSkipEmptyLines(false);
+		settings.setColumnReorderingEnabled(false);
+
+		settings.setRowProcessor(new RowProcessor() {
+			
+			@Override
+			public void rowProcessed(String[] row, ParsingContext context) {
+				blackhole.consume(row);
+			}
+			
+			@Override
+			public void processStarted(ParsingContext context) {
+				
+			}
+			
+			@Override
+			public void processEnded(ParsingContext context) {
+				
+			}
+		});
+		CsvParser parser = new CsvParser(settings);
+
 		Reader reader = fileToProcess.getReader();
 		try {
-			parser.beginParsing(reader);
-
-			String[] data;
-			while ((data = parser.parseNext()) != null) {
-				blackhole.consume(data);
-			}
+			parser.parse(reader);
 		} finally {
 			reader.close();
 		}
