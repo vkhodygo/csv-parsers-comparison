@@ -4,7 +4,7 @@ The goal is to provides more details results and cross validation. I still have 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
 
-with java 7.
+with java 7. java 8 seems very sensitive to the buffer size in simpleflatmapper.
 
 ```
 echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor;
