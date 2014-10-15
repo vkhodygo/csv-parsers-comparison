@@ -3,6 +3,14 @@ Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-par
 The goal is to provides more details results and cross validation. I still have issue to reproduce the univocity parser result. 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
+```
+java -jar target/benchmarks.jar -tu us \
+-wi 10 -i 10 -f 5 \
+-p nbRows=1,10,100,1000,10000,100000,1000000,-1 \
+-rf csv -foe -p inputFile=./worldcitiespop.txt \
+-rff jmh.csv -jvmArgs="-Xmx1g -Xms1g"
+```
+
 Non quoted results
 
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
