@@ -4,11 +4,16 @@ The goal is to provides more details results and cross validation. I still have 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
 ```
+echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor;
+echo "2000000" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq;
+echo "2000000" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_max_freq
+
+
 java -jar target/benchmarks.jar -tu us \
--wi 10 -i 10 -f 5 \
--p nbRows=1,10,100,1000,10000,100000,1000000,-1 \
--rf csv -foe -p inputFile=./worldcitiespop.txt \
--rff jmh.csv -jvmArgs="-Xmx1g -Xms1g"
+  -wi 10 -i 10 -f 5 \
+  -p nbRows=1,10,100,1000,10000,100000,1000000,-1 \
+  -rf csv -foe -p inputFile=./worldcitiespop.txt \
+  -rff jmh.csv -jvmArgs="-Xmx1g -Xms1g"
 ```
 
 Non quoted results
