@@ -3,6 +3,9 @@ Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-par
 The goal is to provides more details results and cross validation. I still have issue to reproduce the univocity parser result. 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
+
+with java 7.
+
 ```
 echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor;
 echo "2000000" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq;
