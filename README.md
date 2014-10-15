@@ -4,6 +4,7 @@ The goal is to provides more details results and cross validation. I still have 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
 Non quoted results
+
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |JacksonParser|25.4|33.9|118.0|935.5|9,531.2|95,635.7|932,760.4|2,966,018.8
