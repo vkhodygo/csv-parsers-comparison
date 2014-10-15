@@ -31,7 +31,8 @@ Non quoted results
 |CommonsCsvParser|19.2|34.1|176.8|1,755.2|16,693.0|168,543.8|1,646,064.9|5,275,065.5
 |GenJavaParser|21.8|33.3|149.1|2,039.0|14,588.2|146,585.4|1,430,528.4|4,549,869.5
 |WayIoParser|33.8|49.6|212.4|2,046.2|18,916.9|200,385.1|1,953,943.1|5,585,643.8
-|UnivocityParser|4,730.0|4,721.7|4,888.4|6,149.4|18,657.3|138,338.0|1,276,439.0|4,228,404.3
+|UnivocityParser|4,319.8|4,404.0|4,660.0|5,842.5|17,329.7|129,057.5|1,193,539.4|3,802,930.2
+
 
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/jmh-difference-noquote.png)
 
@@ -51,6 +52,6 @@ Quoted results
 |CommonsCsvParser|20.3|41.1|249.5|2,367.8|23,998.3|242,037.2|2,390,732.2|7,608,694.8
 |GenJavaParser|22.1|34.9|169.6|2,366.1|16,865.7|170,714.5|1,657,820.4|4,615,315.3
 |WayIoParser|34.2|54.9|234.3|2,614.1|24,157.8|250,319.9|2,398,465.8|7,822,576.0
-|UnivocityParser|4,731.3|4,744.1|4,882.0|6,253.0|20,531.9|153,810.2|1,586,026.1|5,083,488.8
+|UnivocityParser|4,342.5|4,445.2|4,622.5|6,000.0|20,099.6|164,562.4|1,574,205.0|4,903,673.4
 
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/jmh-difference-quote.png)
