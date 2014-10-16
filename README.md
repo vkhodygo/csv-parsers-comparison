@@ -5,7 +5,7 @@ There is some change that went in there that improve results needs to run it aga
 
 
 with java 7.
-Java 8 result are a bit surprising as Jcsv for example is slower. Sfm was too that's fixed with 9.12. Trying to figure out what's the difference. It feels like it come from inlining strategy difference, need to confirm with jit watch whem I have time.
+Java 8 TieredCompilation seems to affect the results quite a bit.
 
 ```
 echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor;
