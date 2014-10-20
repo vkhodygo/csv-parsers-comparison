@@ -3,6 +3,9 @@ Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-par
 
 # Comparaison across Java 6, 7 and 8
 
+At the beginning I could not reproduce the results from the orignal benchmark. I decided to try on java 8 and got very different result from java 7. SimpleFlatMapper version 0.9.11 saw a performance degradation like JCsv linked to the TieredCompilation being enable by default on java 8. I change the code in 0.9.12 to use smaller method and manage to get better performance across the board.
+The original benchmark was run against java 6, which gives very different result too.
+
 Us per op, the lower the better. Read full file.
 
 |Parser|Java 6|Java 7|Java 8
