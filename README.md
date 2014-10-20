@@ -9,18 +9,18 @@ MacBook Pro.
 
 |Java|Rank|Benchmark|Score|Score Error (99.9%)
 |----:|----:|----|----:|----:|
-|6|4|JCsvParser|3802.83756|190.4352899
-|6|3|JacksonParser|2586.80584|218.6790098
-|6|1|SimpleFlatMapperParser|1991.82732|168.3337027
-|6|2|UnivocityParser|2132.79524|147.4469788
-|7|4|JCsvParser|1985.96852|123.4967264
-|7|2|JacksonParser|1755.96764|100.0321421
-|7|1|SimpleFlatMapperParser|1550.5718|54.99358007
-|7|3|UnivocityParser|1840.03148|170.6871928
-|8|4|JCsvParser|2230.795341|54.44221554
-|8|2|JacksonParser|1715.708112|132.4211163
-|8|1|SimpleFlatMapperParser|1290.158289|40.74989314
-|8|3|UnivocityParser|1857.650534|150.6935732
+|6|4|JCsvParser|3802.83|190.4352899
+|6|3|JacksonParser|2586.80|218.6790098
+|6|1|SimpleFlatMapperParser|1991.82|168.3337027
+|6|2|UnivocityParser|2132.79|147.4469788
+|7|4|JCsvParser|1985.96|123.4967264
+|7|2|JacksonParser|1755.96|100.0321421
+|7|1|SimpleFlatMapperParser|1550.57|54.99358007
+|7|3|UnivocityParser|1840.03|170.6871928
+|8|4|JCsvParser|2230.79|54.44221554
+|8|2|JacksonParser|1715.70|132.4211163
+|8|1|SimpleFlatMapperParser|1290.15|40.74989314
+|8|3|UnivocityParser|1857.65|150.6935732
 
 ```
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
