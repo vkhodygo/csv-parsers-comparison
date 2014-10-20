@@ -1,37 +1,18 @@
 Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-parsers-comparison/)
 
 
-# Cross version result
-
-Java 6 results reconcile well with original project
+# Comparaison across Java 6, 7 and 8
 
 Us per op, the lower the better. Read full file.
-MacBook Pro.
 
-|Java|Rank|Benchmark|Score|Score Error (99.9%)
-|----:|----:|----|----:|----:|
-|6|4|JCsvParser|3802.83|190.4352899
-|6|3|JacksonParser|2586.80|218.6790098
-|6|1|SimpleFlatMapperParser|1991.82|168.3337027
-|6|2|UnivocityParser|2132.79|147.4469788
-|7|4|JCsvParser|1985.96|123.4967264
-|7|2|JacksonParser|1755.96|100.0321421
-|7|1|SimpleFlatMapperParser|1550.57|54.99358007
-|7|3|UnivocityParser|1840.03|170.6871928
-|8|4|JCsvParser|2230.79|54.44221554
-|8|2|JacksonParser|1715.70|132.4211163
-|8|1|SimpleFlatMapperParser|1290.15|40.74989314
-|8|3|UnivocityParser|1857.65|150.6935732
+|Parser|Java 6|Java 7|Java 8
+|----|---:|---:|----:|
+|JCsvParser|3095|1772|2191
+|JacksonParser|1903|1640|1573
+|SimpleFlatMapperParser|1672|1455|1257
+|UnivocityParser|1929|1607|1858
 
-```
- time wc -w worldcitiespop.txt
- 5681557 worldcitiespop.txt
-
-real	0m0.654s
-user	0m0.625s
-sys	0m0.029s
-```
-
+![Effect of java version](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/jjsu-cross-javaversion.png)
 
 ```
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
