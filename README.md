@@ -24,6 +24,16 @@ MacBook Pro.
 |8|3|UnivocityParser|1857.65|150.6935732
 
 ```
+localhost:csv-parsers-comparison-fork e19224$ time cat worldcitiespop.txt  | wc -c
+ 151145322
+
+real	0m0.687s
+user	0m0.659s
+sys	0m0.154s
+```
+
+
+```
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
 java -jar target/benchmarks.jar "JCsv|SimpleFlat|Univo|Jackson" -p inputFile=./worldcitiespop.txt -p quoted=false -rf csv -rff result_java6.csv -f 5 
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
