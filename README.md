@@ -1,5 +1,39 @@
 Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-parsers-comparison/)
 
+
+# Cross version result
+
+
+Us per op, the lower the better. Read full file.
+MacBook Pro.
+
+|Java|Rank|Benchmark|Score|Score Error (99.9%)
+|----:|----:|----|----:|----:|
+|6|4|JCsvParser|3802.83756|190.4352899
+|6|3|JacksonParser|2586.80584|218.6790098
+|6|1|SimpleFlatMapperParser|1991.82732|168.3337027
+|6|2|UnivocityParser|2132.79524|147.4469788
+|7|4|JCsvParser|1985.96852|123.4967264
+|7|2|JacksonParser|1755.96764|100.0321421
+|7|1|SimpleFlatMapperParser|1550.5718|54.99358007
+|7|3|UnivocityParser|1840.03148|170.6871928
+|8|4|JCsvParser|2230.795341|54.44221554
+|8|2|JacksonParser|1715.708112|132.4211163
+|8|1|SimpleFlatMapperParser|1290.158289|40.74989314
+|8|3|UnivocityParser|1857.650534|150.6935732
+
+```
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.6)
+java -jar target/benchmarks.jar "JCsv|SimpleFlat|Univo|Jackson" -p inputFile=./worldcitiespop.txt -p quoted=false -rf csv -rff result_java6.csv -f 5 
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.7)
+java -jar target/benchmarks.jar "JCsv|SimpleFlat|Univo|Jackson" -p inputFile=./worldcitiespop.txt -p quoted=false -rf csv -rff result_java7.csv -f 5
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+java -jar target/benchmarks.jar "JCsv|SimpleFlat|Univo|Jackson" -p inputFile=./worldcitiespop.txt -p quoted=false -rf csv -rff result_java8.csv -f 5
+```
+
+
+# Java 6 Details Result
+
 The goal is to provides more details results and cross validation. I still have issue to reproduce the univocity parser result. 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
