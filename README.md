@@ -3,6 +3,7 @@ Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-par
 
 # Cross version result
 
+Java 6 results reconcile well with original project
 
 Us per op, the lower the better. Read full file.
 MacBook Pro.
@@ -32,14 +33,13 @@ java -jar target/benchmarks.jar "JCsv|SimpleFlat|Univo|Jackson" -p inputFile=./w
 ```
 
 
-# Java 6 Details Result
+# Java 7 Detailed Result
 
 The goal is to provides more details results and cross validation. I still have issue to reproduce the univocity parser result. 
 There is some change that went in there that improve results needs to run it again - it takes overnight -.
 
 
 with java 7.
-Java 8 TieredCompilation seems to affect the results quite a bit.
 
 ```
 echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor;
