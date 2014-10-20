@@ -24,12 +24,12 @@ MacBook Pro.
 |8|3|UnivocityParser|1857.65|150.6935732
 
 ```
-localhost:csv-parsers-comparison-fork e19224$ time cat worldcitiespop.txt  | wc -c
- 151145322
+ time wc -w worldcitiespop.txt
+ 5681557 worldcitiespop.txt
 
-real	0m0.687s
-user	0m0.659s
-sys	0m0.154s
+real	0m0.654s
+user	0m0.625s
+sys	0m0.029s
 ```
 
 
