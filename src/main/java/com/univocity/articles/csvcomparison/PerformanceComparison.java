@@ -36,9 +36,10 @@ public class PerformanceComparison {
 
 		long time = (System.currentTimeMillis() - start);
 		System.out.println("took " + time + " ms to read " + parser.getRowCount() + " rows. ");
+		System.setProperty("blackhole", parser.getBlackhole());
 		return time;
 	}
-
+	
 	private TreeMap<Long, String> orderByAverageTime(int loops, Map<String, Long[]> stats) {
 		TreeMap<Long, String> averages = new TreeMap<Long, String>();
 

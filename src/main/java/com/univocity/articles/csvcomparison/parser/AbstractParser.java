@@ -20,39 +20,25 @@ import java.nio.charset.*;
 import java.util.*;
 
 public abstract class AbstractParser {
-    public int tlr;
-    public int tlrMask;
 
 	private final String name;
 	private int rowCount;
-	public volatile Object obj1; //something to keep values from processed objects to avoid unwanted JIT's dead code removal
+	private int blackhole; //something to keep values from processed objects to avoid unwanted JIT's dead code removal
 
 	protected AbstractParser(String name) {
 		this.name = name;
-		
-        Random r = new Random(System.nanoTime());
-        tlr = r.nextInt();
-        tlrMask = 1;
 	}
 
 	public final String getName() {
 		return name;
 	}
 
-    public final void consume(Object obj) {
-        int tlr = (this.tlr = (this.tlr * 1664525 + 1013904223));
-        if ((tlr & tlrMask) == 0) {
-            // SHOULD ALMOST NEVER HAPPEN IN MEASUREMENT
-            this.obj1 = obj;
-            this.tlrMask = (this.tlrMask << 1) + 1;
-        }
-    }
-    
+	
 	protected boolean process(Object row) {
 		if(row == null){
 			return false;
 		}
-		consume(row);
+		blackhole +=  System.identityHashCode(row);
 		rowCount++;
 		return true;
 	}
@@ -61,6 +47,9 @@ public abstract class AbstractParser {
 		return rowCount;
 	}
 
+	public String getBlackhole(){
+		return String.valueOf(blackhole);
+	}
 	
 	protected Reader toReader(File input) {
 		try {
