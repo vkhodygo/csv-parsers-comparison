@@ -34,7 +34,13 @@ java -jar target/benchmarks.jar -tu us \
   -rff jmh.csv -jvmArgs="-Xmx1g -Xms1g"
 ```
 
-Run on Ubuntu with oracle jvms. The file should fit into the page cache but was read from an HDD. 
+- Intel(R) Core(TM) i5 CPU         750  @ 2.67GHz
+- Oracle Java 1.6.0_45
+- Oracle Java 1.7.0_72
+- Oracle Java 1.8.0_25
+- 6G Ram
+- Ubuntu
+- HDD
 
 [Excel data](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/results/consolidate.xls)
 
