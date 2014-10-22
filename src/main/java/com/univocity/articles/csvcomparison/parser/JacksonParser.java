@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvParser;
 
 import java.io.File;
+import java.io.Reader;
 import java.util.*;
 
 public class JacksonParser extends AbstractParser {
@@ -12,24 +13,26 @@ public class JacksonParser extends AbstractParser {
 	protected JacksonParser() {
 
 		super("Jackson CSV parser");
-	}
-
-	@Override
-	public int countRows(final File input) throws Exception {
-
-		CsvMapper csvMapper = new CsvMapper();
+		csvMapper = new CsvMapper();
 		csvMapper.enable(CsvParser.Feature.WRAP_AS_ARRAY);
+	}
+	CsvMapper csvMapper; 
+	
+	@Override
+	public void processRows(final File input) throws Exception {
 
-		int count = 0;
+		Reader reader = toReader(input);
+		try {
+			MappingIterator<String[]> iterator = csvMapper.reader(
+					String[].class).readValues(reader);
 
-		MappingIterator<String[]> iterator = csvMapper.reader(String[].class).readValues(input);
-
-		while (iterator.hasNext()) {
-			iterator.next();
-			count++;
+			while (iterator.hasNext()) {
+				process(iterator.next());
+			}
+		} finally {
+			reader.close();
 		}
 
-		return count;
 	}
 
 	@Override

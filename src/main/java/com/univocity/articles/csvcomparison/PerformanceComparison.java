@@ -23,9 +23,6 @@ import com.univocity.articles.csvcomparison.parser.*;
 
 public class PerformanceComparison {
 
-	//private static File file = new File("src/main/resources/worldcitiespop.txt");
-	//private static final int LOOPS = 6;
-
 	private final File file;
 
 	PerformanceComparison(File file) {
@@ -35,10 +32,10 @@ public class PerformanceComparison {
 	private long run(AbstractParser parser) throws Exception {
 		long start = System.currentTimeMillis();
 
-		int rows = parser.countRows(file);
+		parser.processRows(file);
 
 		long time = (System.currentTimeMillis() - start);
-		System.out.println("took " + time + " ms to read " + rows + " rows");
+		System.out.println("took " + time + " ms to read " + parser.getRowCount() + " rows. ");
 		return time;
 	}
 
@@ -97,7 +94,7 @@ public class PerformanceComparison {
 			if (bestTime != 0) {
 				long increasePercentage = time * 100 / bestTime - 100;
 				System.out.print(" \t | " + increasePercentage + "% ");
-			} else {
+			} else{
 				bestTime = time;
 				System.out.print(" \t | Best time! ");
 			}
@@ -106,6 +103,7 @@ public class PerformanceComparison {
 			long worst = getWorstTime(stats.get(parser));
 
 			System.out.println(" \t | " + best + " ms \t | " + worst + " ms |");
+			
 		}
 	}
 
@@ -129,7 +127,7 @@ public class PerformanceComparison {
 					System.out.println("Parser " + parser.getName() + " threw exception " + ex.getMessage());
 				}
 				System.gc();
-				Thread.sleep(200);
+				Thread.sleep(500);
 			}
 		}
 
@@ -137,12 +135,13 @@ public class PerformanceComparison {
 	}
 
 	public static void main(String... args) throws Exception {
+		
 		int loops = 6;
-		File input = new File("src/main/resources/worldcitiespop.txt");
-
+		File input = new File("./worldcitiespop.txt");
+	
 		new PerformanceComparison(input).execute(loops);
 
-		File hugeInput = new File("src/main/resources/worldcitiespop_huge.txt");
+		//File hugeInput = new File("src/main/resources/worldcitiespop_huge.txt");
 		
 		
 		//executes only if the file has not been generated yet.
@@ -153,15 +152,15 @@ public class PerformanceComparison {
 		
 		//Now, creates a copy of the original input. All fields enclosed within quotes. 
 		//Overall performance is the similar in percentage terms, regardless of size. No point in melting our CPU's to get the same result.
-		
-		HugeFileGenerator.generateHugeFile(input, 1, hugeInput);
-
-		System.out.println("==================================");
-		System.out.println("=== Processing huge input file ===");
-		System.out.println("==================================");
-
-		
-		new PerformanceComparison(hugeInput).execute(loops);
+//		
+//		HugeFileGenerator.generateHugeFile(input, 1, hugeInput);
+//
+//		System.out.println("==================================");
+//		System.out.println("=== Processing huge input file ===");
+//		System.out.println("==================================");
+//
+//		
+//		new PerformanceComparison(hugeInput).execute(loops);
 	}
 
 }

@@ -32,6 +32,7 @@ import org.openjdk.jmh.infra.Blackhole;
 
 import com.univocity.articles.jmh.params.FileToProcess;
 import com.univocity.parsers.common.ParsingContext;
+import com.univocity.parsers.common.processor.AbstractRowProcessor;
 import com.univocity.parsers.common.processor.RowProcessor;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
@@ -61,21 +62,10 @@ public class UnivocityParser {
 		settings.setSkipEmptyLines(false);
 		settings.setColumnReorderingEnabled(false);
 
-		settings.setRowProcessor(new RowProcessor() {
-			
+		settings.setRowProcessor(new AbstractRowProcessor() {
 			@Override
 			public void rowProcessed(String[] row, ParsingContext context) {
 				blackhole.consume(row);
-			}
-			
-			@Override
-			public void processStarted(ParsingContext context) {
-				
-			}
-			
-			@Override
-			public void processEnded(ParsingContext context) {
-				
 			}
 		});
 		CsvParser parser = new CsvParser(settings);
