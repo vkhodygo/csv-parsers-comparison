@@ -46,6 +46,8 @@ java -jar target/benchmarks.jar -tu us \
 
 ## No quote results
 
+the unit is us per reading the file of nbrows. The lower the better.
+
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|20.14|28.54|108.97|952.58|9,222.06|91,757.79|902,942.50|2,851,125.72
@@ -65,6 +67,8 @@ java -jar target/benchmarks.jar -tu us \
 
 
 ## Quote results
+
+the unit is us per reading the file of nbrows. The lower the better.
 
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
@@ -88,6 +92,8 @@ java -jar target/benchmarks.jar -tu us \
 
 ## No quote results
 
+the unit is us per reading the file of nbrows. The lower the better.
+
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|19.72|28.09|111.16|955.60|9,486.58|94,629.70|930,430.98|2,960,501.85
@@ -107,6 +113,8 @@ java -jar target/benchmarks.jar -tu us \
 
 
 ## Quote results
+
+the unit is us per reading the file of nbrows. The lower the better.
 
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
@@ -130,6 +138,8 @@ java -jar target/benchmarks.jar -tu us \
 
 ## No quote results
 
+the unit is us per reading the file of nbrows. The lower the better.
+
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|16.80|24.76|100.85|903.99|8,699.96|95,342.90|851,312.95|2,607,463.27
@@ -149,6 +159,8 @@ java -jar target/benchmarks.jar -tu us \
 
 
 ## Quote results
+
+the unit is us per reading the file of nbrows. The lower the better.
 
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
@@ -170,8 +182,7 @@ java -jar target/benchmarks.jar -tu us \
 
 # Comparaison across Java 6, 7 and 8
 
-
-Us per op, the lower the better. Read full file.
+the unit is us per reading the file of 3173959 rows. The lower the better.
 
 |Parser|Java 6|Java 7|Java 8
 |----|---:|---:|----:|
