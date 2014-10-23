@@ -8,12 +8,10 @@ Fork of [uniVocity/csv-parsers-comparison/](https://github.com/uniVocity/csv-par
 
 Some parser can have sensibly different resuslt depending on the java version. TieredCompilation - which is enabled by default in java 8 - seems to have mixed results accross the parsers. Jcsv for example is pretty bad under java 6, pretty good on java 7 but degrade quote a bit in java 8.
 
-Some of the result don't match the orginal benchmark. It could be link to the difference of hardware - also I do think that the  fit in the page cache - or of the benchmark technology used. Jmh take care of lot of benchmark pitfall that the original benchmark could have fall into.
+Some of the result don't match the orginal benchmark. It could be link to the difference of hardware - also I do think that the  fit in the page cache - or of the benchmark technology used.
+Because I get the same result running the jmh and the original benchmark running on my machine I doubt the code is the issue.
 
-I  can think of the following explanation:
- - hardware difference - Quote skeptical about that as the file would fit in the page cache -.
- - dead code elimination, possible to check looking at the bytecode.
- - hotspot optimisation interference, possible to check running the original benchmark in separate jvm.
+
 	
 
 
