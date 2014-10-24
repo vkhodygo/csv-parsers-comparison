@@ -12,7 +12,7 @@ Some of the result don't match the orginal benchmark. It could be link to the di
 Because I get the same result running the jmh and the original benchmark running on my machine I doubt the code is the issue.
 
 
-	
+BeanIO and GenJava have the worst performance overall.	
 
 
 # Benchmarks
