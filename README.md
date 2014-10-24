@@ -63,6 +63,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[GenJavaParser 1.0](http://www.osjava.org/genjava/multiproject/gj-csv/)|22.09|43.14|310.17|3,646.43|34,528.72|346,179.33|3,562,115.56|9,631,608.76
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,624.52|5,006.20|5,008.80|6,075.66|17,654.54|129,042.37|1,201,905.84|3,795,047.80
 
+Latency difference in % from jackson parser
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_6_noquote.png)
 
 
@@ -86,6 +87,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,732.06|4,947.59|5,071.73|6,473.15|20,828.25|165,044.87|1,513,026.28|4,816,604.56
 |[Bean IO 2.1.0](http://beanio.org/)|24.12|61.14|501.49|5,656.26|54,608.29|587,428.25|5,652,539.16|17,933,796.24
 
+Latency difference in % from jackson parser
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_6_quote.png)
 
 # Java 7 Results
@@ -109,6 +111,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[GenJavaParser 1.0](http://www.osjava.org/genjava/multiproject/gj-csv/)|22.27|43.13|306.12|3,345.93|38,595.54|388,596.62|3,986,230.89|9,642,639.70
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,215.42|4,293.13|4,418.93|5,664.93|17,217.57|129,340.12|1,195,599.78|3,822,596.72
 
+Latency difference in % from jackson parser
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_7_noquote.png)
 
 
@@ -132,6 +135,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,203.45|4,295.34|4,456.82|5,855.16|20,074.64|153,470.56|1,502,527.95|4,836,070.85
 |[Bean IO 2.1.0](http://beanio.org/)|24.15|62.62|503.72|5,371.11|59,605.92|608,495.75|5,708,588.10|18,253,867.13
 
+Latency difference in % from jackson parser
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_7_quote.png)
 
 
@@ -156,6 +160,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[GenJavaParser 1.0](http://www.osjava.org/genjava/multiproject/gj-csv/)|18.35|42.38|309.84|3,319.83|31,267.07|338,284.36|3,824,016.51|8,809,981.80
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,005.71|3,996.69|4,135.28|5,320.38|17,188.48|129,398.67|1,202,707.05|3,770,764.67
 
+Latency difference in % from jackson parser
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_8_noquote.png)
 
 
@@ -179,6 +184,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|3,993.46|4,000.42|4,171.43|5,531.57|18,806.43|143,271.91|1,344,102.72|4,275,403.94
 |[Bean IO 2.1.0](http://beanio.org/)|20.41|58.87|463.19|4,987.58|52,391.02|535,415.79|6,081,133.21|19,282,239.96
 
+Latency difference in % from jackson parser
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_8_quote.png)
 
 
