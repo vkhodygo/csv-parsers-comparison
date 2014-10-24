@@ -84,7 +84,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[CommonsCsvParser 1.0](http://commons.apache.org/proper/commons-csv)|20.71|42.01|254.71|2,571.94|24,876.07|247,931.27|2,420,602.49|7,705,605.83
 |[GenJavaParser 1.0](http://www.osjava.org/genjava/multiproject/gj-csv/)|22.76|50.71|386.60|4,512.58|43,296.35|439,620.82|4,703,368.15|14,728,170.89
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,732.06|4,947.59|5,071.73|6,473.15|20,828.25|165,044.87|1,513,026.28|4,816,604.56
-
+|[Bean IO 2.1.0](http://beanio.org/)|24.12|61.14|501.49|5,656.26|54,608.29|587,428.25|5,652,539.16|17,933,796.24
 
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_6_quote.png)
 
@@ -130,6 +130,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[CommonsCsvParser 1.0](http://commons.apache.org/proper/commons-csv)|20.57|41.34|252.79|2,387.38|24,230.68|242,771.72|2,405,679.05|7,660,950.74
 |[GenJavaParser 1.0](http://www.osjava.org/genjava/multiproject/gj-csv/)|22.60|49.65|377.72|4,066.59|47,756.03|480,664.71|4,874,111.33|15,190,696.92
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|4,203.45|4,295.34|4,456.82|5,855.16|20,074.64|153,470.56|1,502,527.95|4,836,070.85
+|[Bean IO 2.1.0](http://beanio.org/)|24.15|62.62|503.72|5,371.11|59,605.92|608,495.75|5,708,588.10|18,253,867.13
 
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_7_quote.png)
 
@@ -176,6 +177,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |[CommonsCsvParser 1.0](http://commons.apache.org/proper/commons-csv)|16.78|34.09|210.30|2,063.55|20,033.62|202,089.81|1,989,681.94|6,285,918.15
 |[GenJavaParser 1.0](http://www.osjava.org/genjava/multiproject/gj-csv/)|18.81|47.48|376.40|3,954.85|40,847.36|418,792.38|4,998,343.04|16,011,964.79
 |[UnivocityParser 1.0.3](https://github.com/uniVocity/univocity-parsers)|3,993.46|4,000.42|4,171.43|5,531.57|18,806.43|143,271.91|1,344,102.72|4,275,403.94
+|[Bean IO 2.1.0](http://beanio.org/)|20.41|58.87|463.19|4,987.58|52,391.02|535,415.79|6,081,133.21|19,282,239.96
 
 ![Difference from jackson parser](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/java_8_quote.png)
 
