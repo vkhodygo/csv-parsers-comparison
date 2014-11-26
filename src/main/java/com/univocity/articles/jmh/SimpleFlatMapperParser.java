@@ -15,7 +15,7 @@ import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.infra.Blackhole;
-import org.sfm.csv.parser.CsvParser;
+import org.sfm.csv.CsvParser;
 import org.sfm.utils.RowHandler;
 
 import com.univocity.articles.jmh.params.BufferSize;
@@ -28,15 +28,11 @@ import com.univocity.articles.jmh.params.FileToProcess;
 @Warmup(iterations=5,batchSize=1)
 @Measurement(iterations=5,batchSize=1)
 public class SimpleFlatMapperParser {
-	CsvParser csvParser;
 
-	
-	@Param(value={"_8K"})
-	public BufferSize bufferSize;
 	
 	@Setup
 	public void init() {
-		csvParser = new CsvParser(bufferSize.size);
+
 	}
 
 	@Benchmark
@@ -44,7 +40,7 @@ public class SimpleFlatMapperParser {
 			final Blackhole blackhole) throws Exception {
 		Reader r = fileToProcess.getReader();
 		try {
-			csvParser.readRows(r, new RowHandler<String[]>() {
+			CsvParser.readRows(r, new RowHandler<String[]>() {
 				@Override
 				public void handle(String[] t) throws Exception {
 					blackhole.consume(t);
