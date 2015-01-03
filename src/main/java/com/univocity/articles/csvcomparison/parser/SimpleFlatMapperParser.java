@@ -15,7 +15,7 @@ public class SimpleFlatMapperParser extends AbstractParser {
 
 	@Override
 	public void processRows(final File input) throws Exception {
-		CsvParser.readRows(toReader(input), new RowHandler<String[]>() {
+		CsvParser.reader(toReader(input)).read(new RowHandler<String[]>() {
 			@Override
 			public void handle(String[] t) throws Exception {
 				process(t);
@@ -25,7 +25,7 @@ public class SimpleFlatMapperParser extends AbstractParser {
 
 	@Override
 	public List<String[]> parseRows(final File input) throws Exception {
-		return CsvParser.readRows(toReader(input), new ListHandler<String[]>()).getList();
+		return CsvParser.reader(toReader(input)).read(new ListHandler<String[]>()).getList();
 	}
 
 }

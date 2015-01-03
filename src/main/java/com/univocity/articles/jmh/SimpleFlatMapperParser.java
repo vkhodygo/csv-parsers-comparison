@@ -40,10 +40,10 @@ public class SimpleFlatMapperParser {
 			final Blackhole blackhole) throws Exception {
 		Reader r = fileToProcess.getReader();
 		try {
-			CsvParser.readRows(r, new RowHandler<String[]>() {
+			CsvParser.reader(r).read(new RowHandler<String[]>() {
 				@Override
-				public void handle(String[] t) throws Exception {
-					blackhole.consume(t);
+				public void handle(String[] strings) throws Exception {
+					blackhole.consume(strings);
 				}
 			});
 		} finally {
