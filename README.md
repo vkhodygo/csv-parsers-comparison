@@ -194,13 +194,13 @@ the unit is us per reading the file of 3173959 rows. The lower the better.
 
 |Parser|Java 6|Java 7|Java 8
 |----|---:|---:|----:|
-|SimpleFlatMapperParser|2,789,921.22|2,714,072.18|2,581,990.07
-|JCsvParser|4,549,693.90|2,802,376.69|3,328,120.16
-|JacksonParser|2,851,125.72|2,960,501.85|2,607,463.27
-|UnivocityParser|3,795,047.80|3,822,596.72|3,770,764.67
-|SuperCsvParser|5,196,234.91|3,967,037.89|4,359,582.60
-|OsterMillerParser|4,746,071.90|4,064,797.80|3,775,870.09
-|OpenCsvParser|4,172,193.53|4,300,140.60|5,041,943.11
+|SimpleFlatMapperParser|2,342,475.25|2,321,910.07|2,544,713.83
+|JCsvParser|4,522,937.51|2,811,022.42|3,538,204.72
+|JacksonParser|2,862,200.83|2,976,824.49|2,632,276.44
+|UnivocityParser|3,909,024.04|3,875,463.28|3,840,187.86
+|SuperCsvParser|5,256,495.20|3,968,221.65|4,406,608.49
+|OsterMillerParser|4,746,388.14|4,075,179.72|3,778,397.37
+|OpenCsvParser|4,156,496.28|4,355,408.10|4,789,898.43
 
 ![Effect of java version](https://raw.githubusercontent.com/arnaudroger/csv-parsers-comparison/master/src/main/resources/charts/javacrossversion.png)
 
