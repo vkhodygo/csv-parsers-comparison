@@ -51,7 +51,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|20.56|28.91|109.42|959.92|9,259.31|91,718.92|904,262.33|2,862,200.83
-|[SimpleFlatMapperParser 0.9.12](https://github.com/arnaudroger/SimpleFlatMapper)|20.97|27.70|92.92|890.45|7,425.59|75,174.15|736,202.60|2,342,475.25
+|[SimpleFlatMapperParser 1.2.0](https://github.com/arnaudroger/SimpleFlatMapper)|20.97|27.70|92.92|890.45|7,425.59|75,174.15|736,202.60|2,342,475.25
 |[JCsvParser 1.4.0](https://code.google.com/p/jcsv/)|22.00|34.37|162.13|1,341.85|12,723.23|127,770.35|1,246,264.46|4,522,937.51
 |[SimpleCsvParser 2.0](https://github.com/quux00/simplecsv)|22.39|36.34|177.18|1,387.69|13,706.27|167,896.96|1,641,417.61|5,221,632.46
 |[OpenCsvParser 2.3](http://opencsv.sourceforge.net/)|21.65|33.82|149.24|1,396.74|12,959.22|133,597.68|1,304,542.01|4,156,496.28
@@ -74,7 +74,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|20.80|31.80|144.23|1,462.09|13,966.33|140,360.80|1,380,760.39|4,401,189.30
-|[SimpleFlatMapperParser 0.9.12](https://github.com/arnaudroger/SimpleFlatMapper)|21.08|31.96|104.00|1,027.17|12,013.12|100,785.66|977,777.05|2,647,928.02
+|[SimpleFlatMapperParser 1.2.0](https://github.com/arnaudroger/SimpleFlatMapper)|21.08|31.96|104.00|1,027.17|12,013.12|100,785.66|977,777.05|2,647,928.02
 |[JCsvParser 1.4.0](https://code.google.com/p/jcsv/)|22.94|41.51|228.19|2,156.42|21,638.66|221,701.13|2,117,656.18|6,822,423.28
 |[SimpleCsvParser 2.0](https://github.com/quux00/simplecsv)|22.51|40.04|217.32|1,787.30|19,384.62|200,927.10|1,965,590.72|6,284,008.83
 |[OpenCsvParser 2.3](http://opencsv.sourceforge.net/)|22.75|41.31|231.37|2,020.68|18,658.59|189,861.09|1,857,790.99|5,969,062.93
@@ -99,7 +99,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|20.24|28.21|111.92|955.18|9,493.98|94,809.19|930,487.07|2,976,824.49
-|[SimpleFlatMapperParser 0.9.12](https://github.com/arnaudroger/SimpleFlatMapper)|20.55|27.28|91.43|1,023.67|7,459.68|74,660.33|744,521.08|2,321,910.07
+|[SimpleFlatMapperParser 1.2.0](https://github.com/arnaudroger/SimpleFlatMapper)|20.55|27.28|91.43|1,023.67|7,459.68|74,660.33|744,521.08|2,321,910.07
 |[JCsvParser 1.4.0](https://code.google.com/p/jcsv/)|21.26|28.68|105.15|1,011.24|9,524.07|94,574.76|934,419.76|2,811,022.42
 |[SimpleCsvParser 2.0](https://github.com/quux00/simplecsv)|22.04|34.95|172.58|1,412.42|16,995.40|160,371.04|1,603,714.95|4,987,105.28
 |[OpenCsvParser 2.3](http://opencsv.sourceforge.net/)|21.57|33.50|165.77|1,627.72|14,437.39|148,230.18|1,424,704.26|4,355,408.10
@@ -122,7 +122,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|20.47|31.27|148.96|1,453.41|13,931.26|138,685.49|1,365,335.11|4,363,888.96
-|[SimpleFlatMapperParser 0.9.12](https://github.com/arnaudroger/SimpleFlatMapper)|20.80|32.08|107.77|942.46|11,647.54|102,628.48|982,690.25|2,635,456.90
+|[SimpleFlatMapperParser 1.2.0](https://github.com/arnaudroger/SimpleFlatMapper)|20.80|32.08|107.77|942.46|11,647.54|102,628.48|982,690.25|2,635,456.90
 |[JCsvParser 1.4.0](https://code.google.com/p/jcsv/)|21.80|33.19|146.64|1,360.52|13,421.54|136,428.87|1,325,533.89|4,236,211.65
 |[SimpleCsvParser 2.0](https://github.com/quux00/simplecsv)|22.73|40.94|212.33|2,203.63|20,136.39|203,944.21|2,002,961.29|6,348,187.18
 |[OpenCsvParser 2.3](http://opencsv.sourceforge.net/)|22.13|36.84|177.19|2,185.44|19,897.37|199,481.46|2,081,256.96|6,610,777.70
@@ -148,7 +148,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|16.97|24.77|100.55|901.69|8,896.07|94,738.75|853,498.25|2,632,276.44
-|[SimpleFlatMapperParser 0.9.12](https://github.com/arnaudroger/SimpleFlatMapper)|17.53|23.58|94.14|885.84|8,468.54|71,266.72|687,330.28|2,544,713.83
+|[SimpleFlatMapperParser 1.2.0](https://github.com/arnaudroger/SimpleFlatMapper)|17.53|23.58|94.14|885.84|8,468.54|71,266.72|687,330.28|2,544,713.83
 |[JCsvParser 1.4.0](https://code.google.com/p/jcsv/)|18.08|27.02|117.38|1,156.94|10,631.32|108,310.56|1,043,085.15|3,538,204.72
 |[SimpleCsvParser 2.0](https://github.com/quux00/simplecsv)|19.18|32.37|169.22|1,628.87|15,464.43|157,553.29|1,562,049.57|4,877,498.34
 |[OpenCsvParser 2.3](http://opencsv.sourceforge.net/)|18.84|31.93|161.40|1,554.06|15,182.50|151,518.48|1,518,520.20|4,789,898.43
@@ -171,7 +171,7 @@ the unit is us per reading the file of nbrows. The lower the better.
 |Parser/nbrows|1|10|100|1000|10000|100000|1000000|3173959
 |------|------:|----:|----:|----:|----:|----:|----:|----:|
 |[JacksonParser 2.4.2](https://github.com/FasterXML/jackson-dataformat-csv)|17.05|27.53|133.20|1,363.76|13,582.91|141,354.32|1,198,963.25|3,855,814.01
-|[SimpleFlatMapperParser 0.9.12](https://github.com/arnaudroger/SimpleFlatMapper)|17.96|28.95|103.55|903.07|10,399.61|98,014.00|987,683.82|2,579,806.64
+|[SimpleFlatMapperParser 1.2.0](https://github.com/arnaudroger/SimpleFlatMapper)|17.96|28.95|103.55|903.07|10,399.61|98,014.00|987,683.82|2,579,806.64
 |[JCsvParser 1.4.0](https://code.google.com/p/jcsv/)|18.35|29.79|144.35|1,392.68|13,206.78|140,968.94|1,360,875.42|4,232,535.86
 |[SimpleCsvParser 2.0](https://github.com/quux00/simplecsv)|19.60|35.99|205.69|2,017.18|19,509.33|195,672.45|1,923,729.58|6,147,489.91
 |[OpenCsvParser 2.3](http://opencsv.sourceforge.net/)|19.75|38.65|225.62|2,272.33|20,009.25|204,661.36|2,046,529.59|6,358,606.13
