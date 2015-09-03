@@ -202,5 +202,10 @@
       <artifactId>Platform</artifactId>
       <version>1.0.0-SNAPSHOT</version>
     </dependency>
+    <dependency>
+       <groupId>com.webaction</groupId>
+       <artifactId>DSVParser</artifactId>
+       <version>1.0.0-SNAPSHOT</version> 
+    </dependency>
 	</dependencies>
 </project>
