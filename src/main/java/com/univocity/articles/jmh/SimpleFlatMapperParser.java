@@ -1,25 +1,13 @@
 package com.univocity.articles.jmh;
 
+import com.univocity.articles.jmh.params.FileToProcess;
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
+import org.simpleflatmapper.csv.CsvParser;
+import org.simpleflatmapper.util.CheckedConsumer;
+
 import java.io.Reader;
 import java.util.concurrent.TimeUnit;
-
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Param;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
-import org.sfm.csv.CsvParser;
-import org.sfm.utils.RowHandler;
-
-import com.univocity.articles.jmh.params.BufferSize;
-import com.univocity.articles.jmh.params.FileToProcess;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
@@ -40,9 +28,9 @@ public class SimpleFlatMapperParser {
 			final Blackhole blackhole) throws Exception {
 		Reader r = fileToProcess.getReader();
 		try {
-			CsvParser.reader(r).read(new RowHandler<String[]>() {
+			CsvParser.reader(r).read(new CheckedConsumer<String[]>() {
 				@Override
-				public void handle(String[] strings) throws Exception {
+				public void accept(String[] strings) throws Exception {
 					blackhole.consume(strings);
 				}
 			});

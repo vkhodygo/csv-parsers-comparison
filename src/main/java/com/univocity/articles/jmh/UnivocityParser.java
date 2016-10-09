@@ -15,27 +15,16 @@
  ******************************************************************************/
 package com.univocity.articles.jmh;
 
-import java.io.Reader;
-import java.util.concurrent.TimeUnit;
-
-import org.openjdk.jmh.annotations.Benchmark;
-import org.openjdk.jmh.annotations.BenchmarkMode;
-import org.openjdk.jmh.annotations.Fork;
-import org.openjdk.jmh.annotations.Measurement;
-import org.openjdk.jmh.annotations.Mode;
-import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
-import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
-import org.openjdk.jmh.annotations.Warmup;
-import org.openjdk.jmh.infra.Blackhole;
-
 import com.univocity.articles.jmh.params.FileToProcess;
 import com.univocity.parsers.common.ParsingContext;
 import com.univocity.parsers.common.processor.AbstractRowProcessor;
-import com.univocity.parsers.common.processor.RowProcessor;
 import com.univocity.parsers.csv.CsvParser;
 import com.univocity.parsers.csv.CsvParserSettings;
+import org.openjdk.jmh.annotations.*;
+import org.openjdk.jmh.infra.Blackhole;
+
+import java.io.Reader;
+import java.util.concurrent.TimeUnit;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
@@ -62,7 +51,37 @@ public class UnivocityParser {
 		settings.setSkipEmptyLines(false);
 		settings.setColumnReorderingEnabled(false);
 
-		settings.setRowProcessor(new AbstractRowProcessor() {
+		settings.setProcessor(new AbstractRowProcessor() {
+			@Override
+			public void rowProcessed(String[] row, ParsingContext context) {
+				blackhole.consume(row);
+			}
+		});
+
+		CsvParser parser = new CsvParser(settings);
+
+		Reader reader = fileToProcess.getReader();
+		try {
+			parser.parse(reader);
+		} finally {
+			reader.close();
+		}
+	}
+
+	@Benchmark
+	public void parseFileInSameThread(final FileToProcess fileToProcess,
+						  final Blackhole blackhole) throws Exception {
+
+		CsvParserSettings settings = new CsvParserSettings();
+		settings.setIgnoreLeadingWhitespaces(false);
+		settings.setIgnoreTrailingWhitespaces(false);
+		settings.setSkipEmptyLines(false);
+		settings.setColumnReorderingEnabled(false);
+		settings.setCommentCollectionEnabled(true);
+		settings.setReadInputOnSeparateThread(false);
+		settings.setInputBufferSize(16 * 1024);
+
+		settings.setProcessor(new AbstractRowProcessor() {
 			@Override
 			public void rowProcessed(String[] row, ParsingContext context) {
 				blackhole.consume(row);
