@@ -102,6 +102,8 @@ public class PerformanceComparison {
     }
 
     private void printResults(int loops, Map<String, Long[]> stats) {
+        System.out.println("\n=== JVM: " + Runtime.version() + "\n");
+
         System.out.println("\n=========\n AVERAGES \n=========\n");
 
         Map<Long, String> averages = orderByAverageTime(loops, stats);
