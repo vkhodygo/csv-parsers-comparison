@@ -16,14 +16,17 @@
 package com.univocity.articles.csvcomparison;
 
 import java.io.*;
+import java.net.URI;
 import java.net.URL;
 import java.util.*;
 import java.util.Map.Entry;
 
 import com.univocity.articles.csvcomparison.parser.*;
+import org.apache.xmlbeans.impl.common.IOUtil;
 
 public class PerformanceComparison {
 
+	private static final String WORLDCITIES_URL = "http://www.maxmind.com/download/worldcities/worldcitiespop.txt.gz";
 	private static final String WORLDCITIES_FILE = "worldcitiespop.txt";
 	private static final String WORLDCITIES_FILE_ENCODING = "ISO-8859-1";
 	private static final String WORLDCITIES_HUGE_FILE = "worldcitiespop_huge.txt";
@@ -158,7 +161,7 @@ public class PerformanceComparison {
 		int loops = 6;
 
 		File input = null;
-		final URL inputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_FILE);
+		URL inputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_FILE);
 
 		if (inputUrl != null) {
 			try {
@@ -175,7 +178,15 @@ public class PerformanceComparison {
 					throw new IllegalStateException("Could not find '" + WORLDCITIES_FILE + "' in classpath or in folder: " + args[0]);
 				}
 			} else {
-				throw new IllegalStateException("Could not find '" + WORLDCITIES_FILE + "' in classpath, or path not specified as arg[0]");
+				File f = File.createTempFile("", "");
+				f.delete();
+
+                f = f.getParentFile();
+
+				input = new File(f, WORLDCITIES_FILE);
+				inputUrl = input.toURI().toURL();
+
+				IOUtil.copyCompletely(new URI(WORLDCITIES_URL), input.toURI());
 			}
 		}
 

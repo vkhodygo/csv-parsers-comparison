@@ -37,7 +37,8 @@ public class Parsers {
 			new OsterMillerParser(),
 			new JacksonParser(),
 			new SimpleFlatMapperParser(),
-			new ProductCollectionsParser()
+			new ProductCollectionsParser(),
+			new CSVSimpleParser()
 	);
 
 	private Parsers() {
