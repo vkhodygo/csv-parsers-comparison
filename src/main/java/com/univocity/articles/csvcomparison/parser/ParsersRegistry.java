@@ -32,30 +32,7 @@ public class ParsersRegistry {
 
     private static List<AbstractParser> getAllParsers() {
         // Get Parsers for current VM version
-        final List<AbstractParser> parsers = new ArrayList<AbstractParser>(Parsers.list());
-
-        // Also include Java 8 only parsers?
-        final String javaVersion = System.getProperty("java.version");
-        System.out.println("Detected Java version: " + javaVersion);
-
-        if (javaVersion != null && javaVersion.startsWith("1.8.")) {
-            System.out.println("Also enabling Java 8 only parsers!");
-            parsers.addAll(getJava8OnlyParsers());
-        }
-
-        return Collections.unmodifiableList(parsers);
+        return Parsers.list();
     }
 
-    private static List<AbstractParser> getJava8OnlyParsers() {
-        try {
-            final Class<?> java8Parsers = Class.forName("com.univocity.articles.csvcomparison.parser8.Parsers");
-            return (List<AbstractParser>) java8Parsers.getMethod("list").invoke(null);
-        }
-        catch (final LinkageError e) {
-            throw new RuntimeException("Cannot get Java 8 Only parsers", e);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException("Cannot get Java 8 Only parsers", e);
-        }
-    }
 }
