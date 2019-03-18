@@ -22,15 +22,17 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.univocity.articles.csvcomparison.parser.*;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 import org.apache.xmlbeans.impl.common.IOUtil;
 
 public class PerformanceComparison {
 
-    private static final String WORLDCITIES_URL = "http://www.maxmind.com/download/worldcities/worldcitiespop.txt.gz";
-    private static final String WORLDCITIES_FILE = "worldcitiespop.txt";
-    private static final String WORLDCITIES_FILE_ENCODING = "ISO-8859-1";
-    private static final String WORLDCITIES_HUGE_FILE = "worldcitiespop_huge.txt";
-    private static final String WORLDCITIES_HUGE_FILE_ENCODING = "ISO-8859-1";
+    private static final String GEOLITE2_CITY_CSV_URL = "https://geolite.maxmind.com/download/geoip/database/GeoLite2-City-CSV.zip";
+    private static final String GEOLITE2_CITY_CSV_FILE = "GeoLite2-City-Blocks-IPv4.csv";
+    private static final String GEOLITE2_CITY_CSV_FILE_ENCODING = "ISO-8859-1";
+    private static final String GEOLITE2_CITY_CSV_HUGE_FILE = "geolite2_huge.txt";
+    private static final String GEOLITE2_CITY_CSV_HUGE_FILE_ENCODING = "ISO-8859-1";
 
     private final File file;
     private final String fileEncoding;
@@ -164,7 +166,7 @@ public class PerformanceComparison {
         int loops = 6;
 
         File input = null;
-        URL inputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_FILE);
+        URL inputUrl = PerformanceComparison.class.getClassLoader().getResource(GEOLITE2_CITY_CSV_FILE);
 
         if (inputUrl != null) {
             try {
@@ -177,28 +179,49 @@ public class PerformanceComparison {
 
         if (input == null) {
             if (args.length > 0) {
-                input = new File(args[0], WORLDCITIES_FILE);
+                input = new File(args[0], GEOLITE2_CITY_CSV_FILE);
                 if (!input.exists()) {
-                    throw new IllegalStateException("Could not find '" + WORLDCITIES_FILE + "' in classpath or in folder: " + args[0]);
+                    throw new IllegalStateException("Could not find '" + GEOLITE2_CITY_CSV_FILE + "' in classpath or in folder: " + args[0]);
                 }
             }
             else {
-                File f = File.createTempFile("", "");
-                f.delete();
+                File tmpDir = File.createTempFile("tmp", "");
+                tmpDir.delete();
+                tmpDir = tmpDir.getParentFile();
 
-                f = f.getParentFile();
-
-                input = new File(f, WORLDCITIES_FILE);
+                input = new File(tmpDir, GEOLITE2_CITY_CSV_FILE);
                 inputUrl = input.toURI().toURL();
 
-                IOUtil.copyCompletely(new URI(WORLDCITIES_URL), input.toURI());
+                if (!input.exists()) {
+                    try (ZipInputStream zin = new ZipInputStream(new URL(GEOLITE2_CITY_CSV_URL).openStream())) {
+
+                        boolean found = false;
+
+                        for(;;) {
+                            ZipEntry e = zin.getNextEntry();
+
+                            if (e.getName().endsWith(GEOLITE2_CITY_CSV_FILE)) {
+                                found = true;
+                                try (FileOutputStream out = new FileOutputStream(input)) {
+                                    IOUtil.copyCompletely(zin, out);
+                                }
+                                break;
+                            }
+
+                        }
+
+                        if (!found) {
+                            throw new Error(GEOLITE2_CITY_CSV_FILE + " not found in " + GEOLITE2_CITY_CSV_URL);
+                        }
+                    }
+                }
             }
         }
 
-        new PerformanceComparison(input, WORLDCITIES_FILE_ENCODING).execute(loops);
+        new PerformanceComparison(input, GEOLITE2_CITY_CSV_FILE_ENCODING).execute(loops);
 
         File hugeInput = null;
-        final URL hugeInputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_HUGE_FILE);
+        final URL hugeInputUrl = PerformanceComparison.class.getClassLoader().getResource(GEOLITE2_CITY_CSV_HUGE_FILE);
         if (hugeInputUrl != null) {
             try {
                 hugeInput = new File(hugeInputUrl.toURI());
@@ -210,10 +233,10 @@ public class PerformanceComparison {
 
         if (hugeInput == null) {
             if (args.length > 0) {
-                hugeInput = new File(args[0], WORLDCITIES_HUGE_FILE);
+                hugeInput = new File(args[0], GEOLITE2_CITY_CSV_HUGE_FILE);
             }
             else {
-                throw new IllegalStateException("Could not find '" + WORLDCITIES_HUGE_FILE + "' in classpath, or path not specified as arg[0]");
+                throw new IllegalStateException("Could not find '" + GEOLITE2_CITY_CSV_HUGE_FILE + "' in classpath, or path not specified as arg[0]");
             }
         }
 
@@ -222,13 +245,13 @@ public class PerformanceComparison {
         //It would generate a file with 47,609,385 rows
         //Now, creates a copy of the original input. All fields enclosed within quotes. 
         //Overall performance is the similar in percentage terms, regardless of size. No point in melting our CPU's to get the same result.
-        HugeFileGenerator.generateHugeFile(input, WORLDCITIES_FILE_ENCODING, 1, hugeInput);
+        HugeFileGenerator.generateHugeFile(input, GEOLITE2_CITY_CSV_FILE_ENCODING, 1, hugeInput);
 
         System.out.println("==================================");
         System.out.println("=== Processing huge input file ===");
         System.out.println("==================================");
 
-        new PerformanceComparison(hugeInput, WORLDCITIES_HUGE_FILE_ENCODING).execute(loops);
+        new PerformanceComparison(hugeInput, GEOLITE2_CITY_CSV_HUGE_FILE_ENCODING).execute(loops);
     }
 
 }
