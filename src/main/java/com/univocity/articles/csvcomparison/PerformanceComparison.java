@@ -22,6 +22,7 @@ import java.util.*;
 import java.util.Map.Entry;
 
 import com.univocity.articles.csvcomparison.parser.*;
+import java.lang.management.ManagementFactory;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import org.apache.xmlbeans.impl.common.IOUtil;
@@ -102,7 +103,7 @@ public class PerformanceComparison {
     }
 
     private void printResults(int loops, Map<String, Long[]> stats) {
-        System.out.println("\n=== JVM: " + Runtime.version() + "\n");
+        System.out.println("\n=== JVM: " + ManagementFactory.getRuntimeMXBean().getVmVersion() + "\n");
 
         System.out.println("\n=========\n AVERAGES \n=========\n");
 
