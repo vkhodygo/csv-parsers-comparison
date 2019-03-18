@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison.parser;
 
 import java.io.*;
@@ -28,24 +28,28 @@ class ProductCollectionsParser extends AbstractParser {
 
     @Override
     public void processRows(final Reader input) throws Exception {
-        final CSVReader reader = new CSVReader(input,',','"',1);
+        final CSVReader reader = new CSVReader(input, ',', '"', 1);
         try {
-            while(reader.hasNext()) process(reader.next());
-        } finally {
+            while (reader.hasNext()) {
+                process(reader.next());
+            }
+        }
+        finally {
             reader.reader().close();
         }
     }
 
     @Override
     public List<String[]> parseRows(final Reader input) throws Exception {
-        final CSVReader reader = new CSVReader(input,',','"',0);
+        final CSVReader reader = new CSVReader(input, ',', '"', 0);
         try {
             final List<String[]> values = new ArrayList<String[]>();
             while (reader.hasNext()) {
                 values.add(reader.next());
             }
             return values;
-        } finally {
+        }
+        finally {
             reader.reader().close();
         }
     }

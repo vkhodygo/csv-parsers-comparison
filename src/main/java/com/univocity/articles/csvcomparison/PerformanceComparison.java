@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison;
 
 import java.io.*;
@@ -26,209 +26,209 @@ import org.apache.xmlbeans.impl.common.IOUtil;
 
 public class PerformanceComparison {
 
-	private static final String WORLDCITIES_URL = "http://www.maxmind.com/download/worldcities/worldcitiespop.txt.gz";
-	private static final String WORLDCITIES_FILE = "worldcitiespop.txt";
-	private static final String WORLDCITIES_FILE_ENCODING = "ISO-8859-1";
-	private static final String WORLDCITIES_HUGE_FILE = "worldcitiespop_huge.txt";
-	private static final String WORLDCITIES_HUGE_FILE_ENCODING = "ISO-8859-1";
+    private static final String WORLDCITIES_URL = "http://www.maxmind.com/download/worldcities/worldcitiespop.txt.gz";
+    private static final String WORLDCITIES_FILE = "worldcitiespop.txt";
+    private static final String WORLDCITIES_FILE_ENCODING = "ISO-8859-1";
+    private static final String WORLDCITIES_HUGE_FILE = "worldcitiespop_huge.txt";
+    private static final String WORLDCITIES_HUGE_FILE_ENCODING = "ISO-8859-1";
 
-	private final File file;
-	private final String fileEncoding;
+    private final File file;
+    private final String fileEncoding;
 
-	PerformanceComparison(File file, String fileEncoding) {
-		this.file = file;
-		this.fileEncoding = fileEncoding;
-	}
+    PerformanceComparison(File file, String fileEncoding) {
+        this.file = file;
+        this.fileEncoding = fileEncoding;
+    }
 
-	private long run(AbstractParser parser) throws Exception {
-		Reader reader = null;
-		try {
-			reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), fileEncoding));
+    private long run(AbstractParser parser) throws Exception {
+        Reader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), fileEncoding));
 
-			long start = System.currentTimeMillis();
+            long start = System.currentTimeMillis();
 
-			parser.processRows(reader);
+            parser.processRows(reader);
 
-			long time = (System.currentTimeMillis() - start);
-			System.out.println("took " + time + " ms to read " + parser.getRowCount() + " rows. ");
-			parser.resetRowCount();
-			System.setProperty("blackhole", parser.getBlackhole());
-			return time;
-		} finally {
-			if (reader != null) {
-				reader.close();
-			}
-		}
-	}
+            long time = (System.currentTimeMillis() - start);
+            System.out.println("took " + time + " ms to read " + parser.getRowCount() + " rows. ");
+            parser.resetRowCount();
+            System.setProperty("blackhole", parser.getBlackhole());
+            return time;
+        }
+        finally {
+            if (reader != null) {
+                reader.close();
+            }
+        }
+    }
 
-	private TreeMap<Long, String> orderByAverageTime(int loops, Map<String, Long[]> stats) {
-		TreeMap<Long, String> averages = new TreeMap<Long, String>();
+    private TreeMap<Long, String> orderByAverageTime(int loops, Map<String, Long[]> stats) {
+        TreeMap<Long, String> averages = new TreeMap<Long, String>();
 
-		for (Entry<String, Long[]> parserTimes : stats.entrySet()) {
-			Long[] times = parserTimes.getValue();
-			long average = 0L;
-			//we are discarding the first recorded time here to take into account JIT optimizations
-			for (int i = 1; i < times.length; i++) {
-				average = average + times[i];
-			}
-			average = average / (loops - 1);
-			averages.put(average, parserTimes.getKey());
-		}
+        for (Entry<String, Long[]> parserTimes : stats.entrySet()) {
+            Long[] times = parserTimes.getValue();
+            long average = 0L;
+            //we are discarding the first recorded time here to take into account JIT optimizations
+            for (int i = 1; i < times.length; i++) {
+                average = average + times[i];
+            }
+            average = average / (loops - 1);
+            averages.put(average, parserTimes.getKey());
+        }
 
-		return averages;
-	}
+        return averages;
+    }
 
-	private long getBestTime(Long[] times) {
-		long best = times[1];
-		for (int i = 1; i < times.length; i++) {
-			if (times[i] < best) {
-				best = times[i];
-			}
-		}
-		return best;
-	}
+    private long getBestTime(Long[] times) {
+        long best = times[1];
+        for (int i = 1; i < times.length; i++) {
+            if (times[i] < best) {
+                best = times[i];
+            }
+        }
+        return best;
+    }
 
-	private long getWorstTime(Long[] times) {
-		long worst = times[1];
-		for (int i = 1; i < times.length; i++) {
-			if (times[i] > worst) {
-				worst = times[i];
-			}
-		}
-		return worst;
-	}
+    private long getWorstTime(Long[] times) {
+        long worst = times[1];
+        for (int i = 1; i < times.length; i++) {
+            if (times[i] > worst) {
+                worst = times[i];
+            }
+        }
+        return worst;
+    }
 
-	private void printResults(int loops, Map<String, Long[]> stats) {
-		System.out.println("\n=========\n AVERAGES \n=========\n");
+    private void printResults(int loops, Map<String, Long[]> stats) {
+        System.out.println("\n=========\n AVERAGES \n=========\n");
 
-		Map<Long, String> averages = orderByAverageTime(loops, stats);
-		long bestTime = 0;
-		for (Entry<Long, String> average : averages.entrySet()) {
-			long time = average.getKey();
-			String parser = average.getValue();
-			System.out.print("| " + parser + " \t | " + time + " ms ");
+        Map<Long, String> averages = orderByAverageTime(loops, stats);
+        long bestTime = 0;
+        for (Entry<Long, String> average : averages.entrySet()) {
+            long time = average.getKey();
+            String parser = average.getValue();
+            System.out.print("| " + parser + " \t | " + time + " ms ");
 
-			if (time == -1) {
-				System.out.println("Could not execute");
-				continue;
-			}
+            if (time == -1) {
+                System.out.println("Could not execute");
+                continue;
+            }
 
-			if (bestTime != 0) {
-				long increasePercentage = time * 100 / bestTime - 100;
-				System.out.print(" \t | " + increasePercentage + "% ");
-			} else {
-				bestTime = time;
-				System.out.print(" \t | Best time! ");
-			}
+            if (bestTime != 0) {
+                long increasePercentage = time * 100 / bestTime - 100;
+                System.out.print(" \t | " + increasePercentage + "% ");
+            }
+            else {
+                bestTime = time;
+                System.out.print(" \t | Best time! ");
+            }
 
-			long best = getBestTime(stats.get(parser));
-			long worst = getWorstTime(stats.get(parser));
+            long best = getBestTime(stats.get(parser));
+            long worst = getWorstTime(stats.get(parser));
 
-			System.out.println(" \t | " + best + " ms \t | " + worst + " ms |");
+            System.out.println(" \t | " + best + " ms \t | " + worst + " ms |");
 
-		}
-	}
+        }
+    }
 
-	public void execute(final int loops) throws Exception {
-		Map<String, Long[]> stats = new HashMap<String, Long[]>();
+    public void execute(final int loops) throws Exception {
+        Map<String, Long[]> stats = new HashMap<String, Long[]>();
 
-		for (final AbstractParser parser : ParsersRegistry.getParsers()) {
-			Long[] times = new Long[loops];
-			Arrays.fill(times, -1L);
-			stats.put(parser.getName(), times);
-		}
+        for (final AbstractParser parser : ParsersRegistry.getParsers()) {
+            Long[] times = new Long[loops];
+            Arrays.fill(times, -1L);
+            stats.put(parser.getName(), times);
+        }
 
-		for (int i = 0; i < loops; i++) {
-			for (final AbstractParser parser : ParsersRegistry.getParsers()) {
-				try {
-					System.out.print("Loop " + (i + 1) + " - executing " + parser.getName() + "... ");
-					long time = run(parser);
+        for (int i = 0; i < loops; i++) {
+            for (final AbstractParser parser : ParsersRegistry.getParsers()) {
+                try {
+                    System.out.print("Loop " + (i + 1) + " - executing " + parser.getName() + "... ");
+                    long time = run(parser);
 
-					stats.get(parser.getName())[i] = time;
-				} catch (Throwable ex) {
-					System.out.println("Parser " + parser.getName() + " threw exception: " + ex.getMessage());
-				}
-				System.gc();
-				Thread.sleep(500);
-			}
-		}
+                    stats.get(parser.getName())[i] = time;
+                }
+                catch (Throwable ex) {
+                    System.out.println("Parser " + parser.getName() + " threw exception: " + ex.getMessage());
+                }
+                System.gc();
+                Thread.sleep(500);
+            }
+        }
 
-		printResults(loops, stats);
-	}
+        printResults(loops, stats);
+    }
 
-	public static void main(String... args) throws Exception {
+    public static void main(String... args) throws Exception {
 
-		int loops = 6;
+        int loops = 6;
 
-		File input = null;
-		URL inputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_FILE);
+        File input = null;
+        URL inputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_FILE);
 
-		if (inputUrl != null) {
-			try {
-				input = new File(inputUrl.toURI());
-			} catch (Exception ex) {
-				System.err.println("Error reading file from " + inputUrl + ": " + ex.getMessage());
-			}
-		}
+        if (inputUrl != null) {
+            try {
+                input = new File(inputUrl.toURI());
+            }
+            catch (Exception ex) {
+                System.err.println("Error reading file from " + inputUrl + ": " + ex.getMessage());
+            }
+        }
 
-		if (input == null) {
-			if (args.length > 0) {
-				input = new File(args[0], WORLDCITIES_FILE);
-				if (!input.exists()) {
-					throw new IllegalStateException("Could not find '" + WORLDCITIES_FILE + "' in classpath or in folder: " + args[0]);
-				}
-			} else {
-				File f = File.createTempFile("", "");
-				f.delete();
+        if (input == null) {
+            if (args.length > 0) {
+                input = new File(args[0], WORLDCITIES_FILE);
+                if (!input.exists()) {
+                    throw new IllegalStateException("Could not find '" + WORLDCITIES_FILE + "' in classpath or in folder: " + args[0]);
+                }
+            }
+            else {
+                File f = File.createTempFile("", "");
+                f.delete();
 
                 f = f.getParentFile();
 
-				input = new File(f, WORLDCITIES_FILE);
-				inputUrl = input.toURI().toURL();
+                input = new File(f, WORLDCITIES_FILE);
+                inputUrl = input.toURI().toURL();
 
-				IOUtil.copyCompletely(new URI(WORLDCITIES_URL), input.toURI());
-			}
-		}
+                IOUtil.copyCompletely(new URI(WORLDCITIES_URL), input.toURI());
+            }
+        }
 
+        new PerformanceComparison(input, WORLDCITIES_FILE_ENCODING).execute(loops);
 
-		new PerformanceComparison(input, WORLDCITIES_FILE_ENCODING).execute(loops);
+        File hugeInput = null;
+        final URL hugeInputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_HUGE_FILE);
+        if (hugeInputUrl != null) {
+            try {
+                hugeInput = new File(hugeInputUrl.toURI());
+            }
+            catch (Exception ex) {
+                System.err.println("Error reading file from " + inputUrl + ": " + ex.getMessage());
+            }
+        }
 
-		File hugeInput = null;
-		final URL hugeInputUrl = PerformanceComparison.class.getClassLoader().getResource(WORLDCITIES_HUGE_FILE);
-		if (hugeInputUrl != null) {
-			try {
-				hugeInput = new File(hugeInputUrl.toURI());
-			} catch (Exception ex) {
-				System.err.println("Error reading file from " + inputUrl + ": " + ex.getMessage());
-			}
-		}
+        if (hugeInput == null) {
+            if (args.length > 0) {
+                hugeInput = new File(args[0], WORLDCITIES_HUGE_FILE);
+            }
+            else {
+                throw new IllegalStateException("Could not find '" + WORLDCITIES_HUGE_FILE + "' in classpath, or path not specified as arg[0]");
+            }
+        }
 
-		if (hugeInput == null) {
-			if (args.length > 0) {
-				hugeInput = new File(args[0], WORLDCITIES_HUGE_FILE);
-			} else {
-				throw new IllegalStateException("Could not find '" + WORLDCITIES_HUGE_FILE + "' in classpath, or path not specified as arg[0]");
-			}
-		}
+        //executes only if the file has not been generated yet.
+        //Previously, we created a huge file with the original input, replicated 15 times. All fields enclosed within quotes.
+        //It would generate a file with 47,609,385 rows
+        //Now, creates a copy of the original input. All fields enclosed within quotes. 
+        //Overall performance is the similar in percentage terms, regardless of size. No point in melting our CPU's to get the same result.
+        HugeFileGenerator.generateHugeFile(input, WORLDCITIES_FILE_ENCODING, 1, hugeInput);
 
+        System.out.println("==================================");
+        System.out.println("=== Processing huge input file ===");
+        System.out.println("==================================");
 
-		//executes only if the file has not been generated yet.
-
-
-		//Previously, we created a huge file with the original input, replicated 15 times. All fields enclosed within quotes.
-		//It would generate a file with 47,609,385 rows
-
-		//Now, creates a copy of the original input. All fields enclosed within quotes. 
-		//Overall performance is the similar in percentage terms, regardless of size. No point in melting our CPU's to get the same result.
-
-		HugeFileGenerator.generateHugeFile(input, WORLDCITIES_FILE_ENCODING, 1, hugeInput);
-
-		System.out.println("==================================");
-		System.out.println("=== Processing huge input file ===");
-		System.out.println("==================================");
-
-
-		new PerformanceComparison(hugeInput, WORLDCITIES_HUGE_FILE_ENCODING).execute(loops);
-	}
+        new PerformanceComparison(hugeInput, WORLDCITIES_HUGE_FILE_ENCODING).execute(loops);
+    }
 
 }
