@@ -285,16 +285,6 @@
 
     <repositories>
 
-        <!-- needed for diergo decs -->
-        <repository>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <id>central</id>
-            <name>bintray</name>
-            <url>https://jcenter.bintray.com</url>
-        </repository>
-
         <!-- com.github.azazr:csv-simple -->
         <repository>
             <id>jitpack.io</id>
