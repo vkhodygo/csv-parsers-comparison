@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison.parser;
 
 import java.io.*;
@@ -22,35 +22,35 @@ import org.beanio.stream.csv.*;
 
 public class BeanIoParser extends AbstractParser {
 
-	protected BeanIoParser() {
-		super("Bean IO Parser");
-	}
+    protected BeanIoParser() {
+        super("Bean IO Parser");
+    }
 
-	@Override
-	public void processRows(final Reader input) throws Exception {
-		CsvReader reader = new CsvReader(input);
-		
-		while (process(reader.read()));
-	}
+    @Override
+    public void processRows(final Reader input) throws Exception {
+        CsvReader reader = new CsvReader(input);
 
-	@Override
-	public List<String[]> parseRows(final Reader input) throws Exception {
-		List<String[]> rows = new ArrayList<String[]>();
+        while (process(reader.read()));
+    }
 
-		CsvParserConfiguration cfg = new CsvParserConfiguration();
-		cfg.setMultilineEnabled(true);
-		cfg.setEscape('"');
-		cfg.setQuote('"');
-		cfg.setDelimiter(',');
+    @Override
+    public List<String[]> parseRows(final Reader input) throws Exception {
+        List<String[]> rows = new ArrayList<String[]>();
 
-		CsvReader reader = new CsvReader(input, cfg);
+        CsvParserConfiguration cfg = new CsvParserConfiguration();
+        cfg.setMultilineEnabled(true);
+        cfg.setEscape('"');
+        cfg.setQuote('"');
+        cfg.setDelimiter(',');
 
-		String[] row;
-		while ((row = reader.read()) != null) {
-			rows.add(row);
-		}
+        CsvReader reader = new CsvReader(input, cfg);
 
-		return rows;
-	}
+        String[] row;
+        while ((row = reader.read()) != null) {
+            rows.add(row);
+        }
+
+        return rows;
+    }
 
 }
