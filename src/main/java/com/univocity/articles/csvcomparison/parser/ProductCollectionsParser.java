@@ -18,42 +18,40 @@ package com.univocity.articles.csvcomparison.parser;
 import java.io.*;
 import java.util.*;
 
-import com.espertech.esperio.csv.*;
+import com.github.marklister.collections.io.*;
 
-class EsperioCsvParser extends AbstractParser {
+class ProductCollectionsParser extends AbstractParser {
 
-    protected EsperioCsvParser() {
-        super("Esperio CSV parser");
+    protected ProductCollectionsParser() {
+        super("Product Collections parser");
     }
 
     @Override
     public void processRows(final Reader input) throws Exception {
-
-        AdapterInputSource adapterInputSource = new AdapterInputSource(input);
-        CSVReader reader = new CSVReader(adapterInputSource);
+        final CSVReader reader = new CSVReader(input, ',', '"', 1);
         try {
-            while (process(reader.getNextRecord()));
+            while (reader.hasNext()) {
+                process(reader.next());
+            }
         }
-        catch (EOFException ex) {
-            //end of file, return... lovely implementation
+        finally {
+            reader.reader().close();
         }
     }
 
     @Override
     public List<String[]> parseRows(final Reader input) throws Exception {
-        List<String[]> rows = new ArrayList<String[]>();
-        AdapterInputSource adapterInputSource = new AdapterInputSource(input);
-        CSVReader reader = new CSVReader(adapterInputSource);
-        String[] row;
+        final CSVReader reader = new CSVReader(input, ',', '"', 0);
         try {
-            while ((row = reader.getNextRecord()) != null) {
-                rows.add(row);
+            final List<String[]> values = new ArrayList<String[]>();
+            while (reader.hasNext()) {
+                values.add(reader.next());
             }
+            return values;
         }
-        catch (EOFException ex) {
-            //end of file, return... lovely implementation
+        finally {
+            reader.reader().close();
         }
-        return rows;
     }
 
 }

@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison.parser;
 
 import java.io.*;
@@ -24,38 +24,41 @@ import com.univocity.parsers.csv.*;
 
 class UnivocityParser extends AbstractParser {
 
-	protected UnivocityParser() {
-		super("uniVocity CSV parser");
-	}
+    protected UnivocityParser() {
+        super("uniVocity CSV parser");
+    }
 
-	@Override
-	public void processRows(File input) {
-		CsvParserSettings settings = new CsvParserSettings();
-		
-		//turning off features enabled by default
-		settings.setIgnoreLeadingWhitespaces(false);
-		settings.setIgnoreTrailingWhitespaces(false);
-		settings.setSkipEmptyLines(false);
-		settings.setColumnReorderingEnabled(false);
+    @Override
+    public void processRows(final Reader input) {
+        CsvParserSettings settings = new CsvParserSettings();
+        settings.getFormat().setLineSeparator("\n");
 
-		settings.setRowProcessor(new AbstractRowProcessor() {
-			@Override
-			public void rowProcessed(String[] row, ParsingContext context) {
-				process(row);
-			}
-		});
-		
-		CsvParser parser = new CsvParser(settings);
-		parser.parse(toReader(input));
-	}
+        //turning off features enabled by default
+        settings.getFormat().setLineSeparator("\n");
+        settings.setIgnoreLeadingWhitespaces(false);
+        settings.setIgnoreTrailingWhitespaces(false);
+        settings.setSkipEmptyLines(false);
+        settings.setColumnReorderingEnabled(false);
 
-	@Override
-	public List<String[]> parseRows(File input) {
+        settings.setProcessor(new AbstractRowProcessor() {
+            @Override
+            public void rowProcessed(String[] row, ParsingContext context) {
+                process(row);
+            }
+        });
 
-		CsvParserSettings settings = new CsvParserSettings();
-		CsvParser parser = new CsvParser(settings);
+        CsvParser parser = new CsvParser(settings);
+        parser.parse(input);
+    }
 
-		return parser.parseAll(toReader(input));
-	}
+    @Override
+    public List<String[]> parseRows(final Reader input) {
+
+        CsvParserSettings settings = new CsvParserSettings();
+        settings.getFormat().setLineSeparator("\n");
+        CsvParser parser = new CsvParser(settings);
+
+        return parser.parseAll(input);
+    }
 
 }
