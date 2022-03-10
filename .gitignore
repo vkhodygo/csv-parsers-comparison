@@ -5,3 +5,7 @@ target/
 *.iws
 **/worldcitiespop.txt
 **/worldcitiespop_huge.txt
+
+.classpath
+
+.settings/
