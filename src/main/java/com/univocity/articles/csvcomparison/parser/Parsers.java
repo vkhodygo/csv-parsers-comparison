@@ -40,6 +40,7 @@ public class Parsers {
             new ProductCollectionsParser(),
             new CSVSimpleParser()
     );
+            new WebActionDSVParser()
 
 
     private Parsers() {
