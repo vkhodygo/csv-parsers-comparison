@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison.parser;
 
 import java.io.*;
@@ -22,28 +22,30 @@ import au.com.bytecode.opencsv.*;
 
 class OpenCsvParser extends AbstractParser {
 
-	protected OpenCsvParser() {
-		super("OpenCSV");
-	}
+    protected OpenCsvParser() {
+        super("OpenCSV");
+    }
 
-	@Override
-	public void processRows(final Reader input) throws Exception {
-		CSVReader reader = new CSVReader(input);
-		try {
-			while (process(reader.readNext()));
-		} finally {
-			reader.close();
-		}
-	}
+    @Override
+    public void processRows(final Reader input) throws Exception {
+        CSVReader reader = new CSVReader(input);
+        try {
+            while (process(reader.readNext()));
+        }
+        finally {
+            reader.close();
+        }
+    }
 
-	@Override
-	public List<String[]> parseRows(final Reader input) throws Exception {
-		CSVReader reader = new CSVReader(input);
-		try {
-			return reader.readAll();
-		} finally {
-			reader.close();
-		}
-	}
+    @Override
+    public List<String[]> parseRows(final Reader input) throws Exception {
+        CSVReader reader = new CSVReader(input);
+        try {
+            return reader.readAll();
+        }
+        finally {
+            reader.close();
+        }
+    }
 
 }
