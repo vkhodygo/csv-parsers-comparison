@@ -38,6 +38,7 @@ public class ParsersRegistry {
         final String javaVersion = System.getProperty("java.version");
         System.out.println("Detected Java version: " + javaVersion);
 
+
         if(javaVersion != null && javaVersion.matches("(?:1[.]8[.]|1[.]9[.]|9[.]|\\d{2}[.]).*")) {
             System.out.println("Also enabling Java 8 and above parsers!");
             parsers.addAll(getJava8OnlyParsers());

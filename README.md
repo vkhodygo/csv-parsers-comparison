@@ -62,6 +62,8 @@ This is the list of all parsers currently tested.
 | Diergo Easy CSV Streamable   |                   | [github.com/aburmeis/decs](https://github.com/aburmeis/decs)                                       |
 | Product Collections          |             1.4.5 | [github.com/marklister/product-collections](https://github.com/marklister/product-collections)     |
 | CSV-Simple                   |             1.1.2 | [https://github.com/azazar/csv-simple](https://github.com/azazar/csv-simple)                       |
+| Sesseltjonna-csv          |             1.0.11 | [github.com/skjolber/sesseltjonna-csv](https://github.com/skjolber/sesseltjonna-csv)     |
+
 
 ## Statistics (updated 18th of March, 2019)
 
