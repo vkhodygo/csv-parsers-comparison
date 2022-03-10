@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison.parser;
 
 import java.io.*;
@@ -22,31 +22,31 @@ import org.csveed.api.*;
 
 class CSVeedParser extends AbstractParser {
 
-	protected CSVeedParser() {
-		super("CSVeed");
-	}
+    protected CSVeedParser() {
+        super("CSVeed");
+    }
 
-	@Override
-	public void processRows(final Reader input) throws Exception {
-		CsvClient<Row> parser = new CsvClientImpl<Row>(input);
-		while (process(parser.readRow()));
-	}
+    @Override
+    public void processRows(final Reader input) throws Exception {
+        CsvClient<Row> parser = new CsvClientImpl<Row>(input);
+        while (process(parser.readRow()));
+    }
 
-	@Override
-	public List<String[]> parseRows(final Reader input) throws Exception {
-		List<String[]> rows = new ArrayList<String[]>();
+    @Override
+    public List<String[]> parseRows(final Reader input) throws Exception {
+        List<String[]> rows = new ArrayList<String[]>();
 
-		Row row;
-		CsvClient<Row> parser = new CsvClientImpl<Row>(input);
-		while ((row = parser.readRow()) != null) {
-			String[] data = new String[row.size()];
-			for (int i = 0; i < data.length; i++) {
-				data[i] = row.get(i);
-			}
-			rows.add(data);
-		}
+        Row row;
+        CsvClient<Row> parser = new CsvClientImpl<Row>(input);
+        while ((row = parser.readRow()) != null) {
+            String[] data = new String[row.size()];
+            for (int i = 0; i < data.length; i++) {
+                data[i] = row.get(i);
+            }
+            rows.add(data);
+        }
 
-		return rows;
-	}
+        return rows;
+    }
 
 }

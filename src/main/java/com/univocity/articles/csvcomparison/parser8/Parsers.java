@@ -24,7 +24,11 @@ import java.util.List;
 public class Parsers {
 
 	private static final List<AbstractParser> parsers = Arrays.asList(
-		new DecsParser(), new SesseltjonnaParser()
+		new DecsParser(),
+		new JSaParParser(),
+		new JSaParInternalParser(),
+    new SesseltjonnaParser()
+
 	);
 
 	private Parsers() {

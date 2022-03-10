@@ -1,4 +1,4 @@
-/*******************************************************************************
+/** *****************************************************************************
  * Copyright 2014 uniVocity Software Pty Ltd
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- ******************************************************************************/
+ ***************************************************************************** */
 package com.univocity.articles.csvcomparison.parser;
 
 import java.io.*;
@@ -21,42 +21,41 @@ import java.util.*;
 
 public abstract class AbstractParser {
 
-	private final String name;
-	private int rowCount;
-	private int blackhole; //something to keep values from processed objects to avoid unwanted JIT's dead code removal
+    private final String name;
+    private int rowCount;
+    private int blackhole; //something to keep values from processed objects to avoid unwanted JIT's dead code removal
 
-	protected AbstractParser(String name) {
-		this.name = name;
-	}
+    protected AbstractParser(String name) {
+        this.name = name;
+    }
 
-	public final String getName() {
-		return name;
-	}
+    public final String getName() {
+        return name;
+    }
 
-	
-	protected boolean process(Object row) {
-		if(row == null){
-			return false;
-		}
-		blackhole +=  System.identityHashCode(row);
-		rowCount++;
-		return true;
-	}
-	
-	public void resetRowCount(){
-		rowCount = 0;
-	}
+    protected boolean process(Object row) {
+        if (row == null) {
+            return false;
+        }
+        blackhole += System.identityHashCode(row);
+        rowCount++;
+        return true;
+    }
 
-	public int getRowCount() {
-		return rowCount;
-	}
+    public void resetRowCount() {
+        rowCount = 0;
+    }
 
-	public String getBlackhole(){
-		return String.valueOf(blackhole);
-	}
+    public int getRowCount() {
+        return rowCount;
+    }
 
-	public abstract void processRows(Reader reader) throws Exception;
+    public String getBlackhole() {
+        return String.valueOf(blackhole);
+    }
 
-	public abstract List<String[]> parseRows(Reader reader) throws Exception;
+    public abstract void processRows(Reader reader) throws Exception;
+
+    public abstract List<String[]> parseRows(Reader reader) throws Exception;
 
 }
